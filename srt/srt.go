@@ -3,13 +3,14 @@ package srt
 import (
 	"bufio"
 	"fmt"
-	"gosub/models"
 	"io/ioutil"
 	"log"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/paraizofelipe/gosub/models"
 )
 
 type SubSrt struct {

@@ -1,4 +1,4 @@
-module gosub
+module github.com/paraizofelipe/gosub
 
 go 1.13
 

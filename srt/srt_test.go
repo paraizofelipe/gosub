@@ -1,10 +1,11 @@
 package srt
 
 import (
-	"gosub/models"
 	"log"
 	"testing"
 	"time"
+
+	"github.com/paraizofelipe/gosub/models"
 
 	"github.com/stretchr/testify/assert"
 )

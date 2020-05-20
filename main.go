@@ -2,9 +2,10 @@ package main
 
 import (
 	"flag"
-	"gosub/srt"
 	"log"
 	"strconv"
+
+	"github.com/paraizofelipe/gosub/srt"
 )
 
 func main() {
