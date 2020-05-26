@@ -1,37 +1,15 @@
 package main
 
 import (
-	"flag"
 	"log"
-	"strconv"
+	"os"
 
-	"github.com/paraizofelipe/gosub/srt"
+	"github.com/paraizofelipe/gosub/cmd"
 )
 
 func main() {
-	subSrt := srt.NewSubSrt()
-
-	flag.Parse()
-	fileName := flag.Arg(0)
-	strMs := flag.Arg(1)
-
-	ms, err := strconv.Atoi(strMs)
-	if err != nil {
+	if err := cmd.Execute(os.Args[1:]); err != nil {
 		log.Fatal(err)
-	}
-
-	srt, err := subSrt.Reader(fileName)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	srt, err = subSrt.AdjustTime(srt, ms)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = subSrt.Writer(fileName, srt)
-	if err != nil {
-		log.Fatal(err)
+		os.Exit(1)
 	}
 }
