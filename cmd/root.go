@@ -8,6 +8,7 @@ import (
 
 type Runner interface {
 	Init([]string) error
+	ValidateFlags() error
 	Run() (err error)
 	Name() string
 }
@@ -20,14 +21,17 @@ func Execute(args []string) error {
 
 	cmds := []Runner{
 		NewAdjustCmd(),
+		NewShowCmd(),
 	}
 
 	subcommand := os.Args[1]
 
 	for _, cmd := range cmds {
 		if cmd.Name() == subcommand {
-			err := cmd.Init(os.Args[2:])
-			if err != nil {
+			if err := cmd.Init(os.Args[2:]); err != nil {
+				return err
+			}
+			if err := cmd.ValidateFlags(); err != nil {
 				return err
 			}
 

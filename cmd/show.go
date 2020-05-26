@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"flag"
+	"fmt"
 
 	"github.com/paraizofelipe/gosub/srt"
 )
@@ -14,7 +15,7 @@ type ShowCmd struct {
 
 func NewShowCmd() *ShowCmd {
 	c := &ShowCmd{
-		flags: flag.NewFlagSet("get", flag.ContinueOnError),
+		flags: flag.NewFlagSet("show", flag.ContinueOnError),
 	}
 	c.flags.StringVar(&c.file, "file", "", "path of subtitle file")
 	c.flags.IntVar(&c.index, "index", 0, "subtitle position index")
@@ -30,6 +31,10 @@ func (_c *ShowCmd) Init(args []string) error {
 	return _c.flags.Parse(args)
 }
 
+func (_c *ShowCmd) ValidateFlags() (err error) {
+	return
+}
+
 func (_c *ShowCmd) Run() (err error) {
 	subSrt := srt.NewSubSrt()
 
@@ -37,6 +42,8 @@ func (_c *ShowCmd) Run() (err error) {
 	if err != nil {
 		return
 	}
+
+	fmt.Println(subSrt.Get(_c.index))
 
 	return
 }
